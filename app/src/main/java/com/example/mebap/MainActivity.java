@@ -1,12 +1,9 @@
 package com.example.mebap;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,21 +18,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    TextView txt;
+    TextView txt, txt1;
     Button btn;
     private RequestQueue mQueue;
     String key = "a7cc721e31ef4e5199636b84dd243813";
-//    String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=a7cc721e31ef4e5199636b84dd243813&Type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569";
 //    ArrayAdapter adapter;
 
     // 영화 제목을 담을 ArrayList 변수(items) 선언
@@ -48,18 +39,26 @@ public class MainActivity extends AppCompatActivity {
         setTitle("미림 급식앱");
 
         txt = findViewById(R.id.txt);
+        txt1 = findViewById(R.id.txt1);
         btn = findViewById(R.id.btn);
         mQueue = Volley.newRequestQueue(this);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getDate();
                 jsonParse();
             }
         });
+
     }
+        private void getDate(){
+            Date currentTime = Calendar.getInstance().getTime();
+
+            txt1.setText(currentTime.toString());
+        }
 
         private void jsonParse(){
-            String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=a7cc721e31ef4e5199636b84dd243813&Type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569";
+            String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=a7cc721e31ef4e5199636b84dd243813&Type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569&MLSV_YMD=20220728";
 //            String url = "https://open.neis.go.kr/hub/schoolInfo?Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=T10";
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                                 JSONArray jsonArray  = response.getJSONArray("mealServiceDietInfo");
                                 JSONObject jsonRows = jsonArray.getJSONObject(1); // row가져오기 {"row":[{...
                                 JSONArray jsonRow = jsonRows.getJSONArray("row"); // [{"...
-                                JSONObject json1 = jsonRow.getJSONObject(1); // {"...
+                                JSONObject json1 = jsonRow.getJSONObject(0); // {"... 0: 아침 / 1: 중식 / 2:석식
                                 String school = json1.getString("DDISH_NM");
                                 school = school.replace("<br/>", "\n");
 //                                Log.e("test", school.toString());

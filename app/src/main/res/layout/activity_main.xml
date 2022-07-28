@@ -11,9 +11,15 @@
 
       <TextView
           android:id="@+id/txt"
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="300dp"
           android:text="피싱데이터"/>
+
+      <TextView
+          android:id="@+id/txt1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="알레르기 유발식품 : ①-난류 ②-우유 ③-메밀 ④-땅콩 ⑤-대두 ⑥-밀 ⑦-고등어 ⑧-게 ⑨-새우 ⑩-돼지고기 ⑪-복숭아 ⑫-토마토 ⑬-아황산염."/>
 
       <Button
           android:id="@+id/btn"
