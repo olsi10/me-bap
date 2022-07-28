@@ -1,6 +1,7 @@
 package com.example.mebap;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,7 +29,15 @@ public class MainActivity extends AppCompatActivity {
     TextView txt, txt1;
     Button btn;
     private RequestQueue mQueue;
+    // https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json&KEY=a7cc721e31ef4e5199636b84dd243813&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569&MLSV_YMD=20220728&pIndex=1&pSize=10
+    String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json";
+    //    String urls = "https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json";
     String key = "a7cc721e31ef4e5199636b84dd243813";
+    String areaCode = "B10"; //서울
+    String schoolCode = "7010569"; //미림여자정보과학고등학교
+    int urlDays = getUrlDate();
+    String newUrl = url + "&KEY=" + key + "&ATPT_OFCDC_SC_CODE=" + areaCode + "&SD_SCHUL_CODE=" + schoolCode + "&MLSV_YMD=" + urlDays + "&pIndex=1&pSize=10";
+
 //    ArrayAdapter adapter;
 
     // 영화 제목을 담을 ArrayList 변수(items) 선언
@@ -47,56 +56,66 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDate();
                 jsonParse();
+                getDate();
+                Log.e("새로운 링크",newUrl);
             }
         });
-
     }
-        private void getDate(){
-            Date currentTime = Calendar.getInstance().getTime();
 
-            String format_hh_mm = "hh:mm";
-            String format_mm_dd = "MM월 dd일";
 
-            SimpleDateFormat format = new SimpleDateFormat(format_hh_mm, Locale.getDefault());
-            SimpleDateFormat format1 = new SimpleDateFormat(format_mm_dd, Locale.getDefault());
-            String formatTime = format.format(currentTime); // 현재 시간 가져오기
-            String formatDay  = format1.format(currentTime); // 현재 일 가져오기
-            txt1.setText(formatDay.toString());
-        }
+    private void jsonParse(){
 
-        private void jsonParse(){
-            String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=a7cc721e31ef4e5199636b84dd243813&Type=json&pIndex=1&pSize=10&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569&MLSV_YMD=20220728";
-//            String url = "https://open.neis.go.kr/hub/schoolInfo?Type=json&pIndex=1&pSize=100&ATPT_OFCDC_SC_CODE=T10";
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-//                                JSONObject jsonobj = response.getJSONObject("mealServiceDietInfo");
-                                JSONArray jsonArray  = response.getJSONArray("mealServiceDietInfo");
-                                JSONObject jsonRows = jsonArray.getJSONObject(1); // row가져오기 {"row":[{...
-                                JSONArray jsonRow = jsonRows.getJSONArray("row"); // [{"...
-                                JSONObject json1 = jsonRow.getJSONObject(0); // {"... 0: 아침 / 1: 중식 / 2:석식
-                                String school = json1.getString("DDISH_NM");
-                                school = school.replace("<br/>", "\n");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, newUrl , null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray  = response.getJSONArray("mealServiceDietInfo");
+                            JSONObject jsonRows = jsonArray.getJSONObject(1); // row가져오기 {"row":[{...
+                            JSONArray jsonRow = jsonRows.getJSONArray("row"); // [{"...
+                            JSONObject json1 = jsonRow.getJSONObject(0); // {"... 0: 아침 / 1: 중식 / 2:석식             // 시간대별로 보여주는 급식
+                            String school = json1.getString("DDISH_NM");
+                            school = school.replace("<br/>", "\n");
 //                                Log.e("test", school.toString());
-                                txt.setText(school.toString());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            txt.setText(school.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                }
-            });
-            mQueue.add(request);
-        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+    }
 
+    private void getDate(){
+        Date currentTime = Calendar.getInstance().getTime();
+
+        String format_hh_mm = "hh:mm";
+        String format_mm_dd = "MM월 dd일";
+
+        SimpleDateFormat format = new SimpleDateFormat(format_hh_mm, Locale.getDefault());
+        SimpleDateFormat format1 = new SimpleDateFormat(format_mm_dd, Locale.getDefault());
+        String formatTime = format.format(currentTime); // 현재 시간 가져오기
+        String formatDay  = format1.format(currentTime); // 현재 일 가져오기
+
+        txt1.setText(formatTime.toString());
+    }
+
+    private int getUrlDate(){ //url에 들어가는 날짜를 구하는 메서드
+        Date currentTime = Calendar.getInstance().getTime();
+        String format_yy_mm_dd = "yyyyMMdd";
+        SimpleDateFormat format2 = new SimpleDateFormat(format_yy_mm_dd, Locale.getDefault());
+        String formatDays = format2.format(currentTime); // 파싱할 데이터 넣기
+        int intDays = Integer.parseInt(String.valueOf(formatDays));
+
+        return intDays;
+    }
 
 //        try {
 //            // 인증키
