@@ -18,9 +18,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     TextView txt, txt1;
@@ -54,7 +56,14 @@ public class MainActivity extends AppCompatActivity {
         private void getDate(){
             Date currentTime = Calendar.getInstance().getTime();
 
-            txt1.setText(currentTime.toString());
+            String format_hh_mm = "hh:mm";
+            String format_mm_dd = "MM월 dd일";
+
+            SimpleDateFormat format = new SimpleDateFormat(format_hh_mm, Locale.getDefault());
+            SimpleDateFormat format1 = new SimpleDateFormat(format_mm_dd, Locale.getDefault());
+            String formatTime = format.format(currentTime); // 현재 시간 가져오기
+            String formatDay  = format1.format(currentTime); // 현재 일 가져오기
+            txt1.setText(formatDay.toString());
         }
 
         private void jsonParse(){
