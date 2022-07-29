@@ -1,5 +1,6 @@
 package com.example.mebap;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,13 +72,24 @@ public class MainActivity extends AppCompatActivity {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, newUrl , null,
                 new Response.Listener<JSONObject>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray  = response.getJSONArray("mealServiceDietInfo");
                             JSONObject jsonRows = jsonArray.getJSONObject(1); // row가져오기 {"row":[{...
                             JSONArray jsonRow = jsonRows.getJSONArray("row"); // [{"...
-                            JSONObject json1 = jsonRow.getJSONObject(0); // {"... 0: 아침 / 1: 중식 / 2:석식             // 시간대별로 보여주는 급식
+                            int minute = getMinute();
+                            JSONObject json1;
+                            if(18 * 60 + 10 <= minute)
+                                json1 = jsonRow.getJSONObject(0); // {"... 0: 아침 / 1: 중식 / 2:석식             // 시간대별로 보여주는 급식
+                            else if(13*60+10 <= minute)
+                                json1 = jsonRow.getJSONObject(2);
+                            else if(7*60+30 <= minute)
+                                json1 = jsonRow.getJSONObject(1);
+                            else
+                                json1 = jsonRow.getJSONObject(0);
+
                             String school = json1.getString("DDISH_NM");
                             school = school.replace("<br/>", "\n");
 //                                Log.e("test", school.toString());
@@ -115,6 +129,17 @@ public class MainActivity extends AppCompatActivity {
         int intDays = Integer.parseInt(String.valueOf(formatDays));
 
         return intDays;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private int getMinute(){
+        LocalTime now = LocalTime.now();
+
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        int minutes = (hour*60) + minute;
+
+        return minutes;
     }
 
 //        try {
