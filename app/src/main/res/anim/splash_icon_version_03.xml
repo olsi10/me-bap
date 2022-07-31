@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+        android:interpolator="@android:anim/bounce_interpolator">
+
+<!--interpolator : 각각 엘리먼트들을 효과 시간동안 어떻게 나타낼 것인지 지정 =>
+                    @android:anim/interpolatorName 사용-
+                    bounce_interpolator : 도착위치에서 튕김
+                    https://koreaparks.tistory.com/126 참고-->
+
+    <alpha
+        android:duration="3000"
+        android:fromAlpha="0.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toAlpha="1.0"/>
+
+    <translate
+        android:fromYDelta="-400%"
+        android:toYDelta="0%"
+        android:duration="2000"/>
+
+    <rotate
+        android:duration="4000"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:fromDegrees="0"
+        android:toDegrees="360"/>
+
+    <!--    duration : 실행 시간-->
+    <!--    pivotX : X축 중심값 (50% = X축 중앙)-->
+    <!--    pivotY : Y축 중심값 (50% = Y축 중앙)-->
+    <!--    fromDegrees : 시작 각도 (0 : 회전 0도)-->
+    <!--    toDegrees : 끝 각도 (360 : 회전 360도)-->
+
+<!--    - scale
+        크기 조절 애니메이션
+        - translate
+        수직 및/또는 수평 모션. 세 가지 형식의 속성을 지원합니다.-->
+<!--    - duration
+        실행 시간-->
+
+<!--    엘리먼트와 속성 정리 사이트 참고 : https://ggoreb.tistory.com/8-->
+</set>

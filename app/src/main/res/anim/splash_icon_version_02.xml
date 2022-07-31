@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/bounce_interpolator">
+
+    <alpha
+        android:duration="2000"
+        android:fromAlpha="0.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toAlpha="1.0"/>
+
+    <translate
+        android:fromYDelta="-400%"
+        android:toYDelta="0%"
+        android:duration="2000"/>
+
+    <rotate
+        android:duration="3000"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:fromDegrees="0"
+        android:toDegrees="90"/>
+
+    <!--    duration : 실행 시간-->
+    <!--    pivotX : X축 중심값 (50% = X축 중앙)-->
+    <!--    pivotY : Y축 중심값 (50% = Y축 중앙)-->
+    <!--    fromDegrees : 시작 각도 (0 : 회전 0도)-->
+    <!--    toDegrees : 끝 각도 (360 : 회전 360도)-->
+
+</set>
