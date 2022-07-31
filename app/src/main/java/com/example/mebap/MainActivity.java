@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     int urlDays = getUrlDate();
     String newUrl = url + "&KEY=" + key + "&ATPT_OFCDC_SC_CODE=" + areaCode + "&SD_SCHUL_CODE=" + schoolCode + "&MLSV_YMD=" + urlDays + "&pIndex=1&pSize=10";
 
+
+
 //    ArrayAdapter adapter;
 
     // 영화 제목을 담을 ArrayList 변수(items) 선언
@@ -141,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         return minutes;
     }
+
 
 //        try {
 //            // 인증키
