@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    TextView txt, txt1;
+    TextView txt, txt1, time;
     Button btn;
     private RequestQueue mQueue;
     // https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json&KEY=a7cc721e31ef4e5199636b84dd243813&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569&MLSV_YMD=20220728&pIndex=1&pSize=10
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         txt = findViewById(R.id.txt);
         txt1 = findViewById(R.id.txt1);
         btn = findViewById(R.id.btn);
+        time = findViewById(R.id.time);
         mQueue = Volley.newRequestQueue(this);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
         String formatTime = format.format(currentTime); // 현재 시간 가져오기
         String formatDay  = format1.format(currentTime); // 현재 일 가져오기
 
-        txt1.setText(formatTime.toString());
+//        txt1.setText(formatTime.toString());
+        time.setText(formatTime.toString());
     }
 
     private int getUrlDate(){ //url에 들어가는 날짜를 구하는 메서드
