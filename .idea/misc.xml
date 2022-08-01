@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Projects/Projects/MeBap/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Firebase/MeBap/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Firebase/MeBap/app/src/main/res/drawable/radius.xml" value="0.1405" />
+        <entry key="..\:/Firebase/MeBap/app/src/main/res/drawable/radius2.xml" value="0.1405" />
+        <entry key="..\:/Firebase/MeBap/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Firebase/MeBap/app/src/main/res/layout/activity_splash.xml" value="0.23802083333333332" />
         <entry key="..\:/Firebase/MeBap/app/src/main/res/xml/fade_in.xml" value="0.2779805352798054" />
       </map>
