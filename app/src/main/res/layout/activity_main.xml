@@ -8,20 +8,44 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+      <TextView
+          android:layout_marginTop="50dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="time"
+          android:textSize="50dp"
+          android:id="@+id/time"/>
+
 
       <TextView
           android:id="@+id/txt"
-          android:layout_width="wrap_content"
-          android:layout_height="300dp"
-          android:text="피싱데이터"/>
+          android:layout_width="330dp"
+          android:layout_height="370dp"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:layout_marginTop="30dp"
+          android:background="@drawable/radius"
+          android:backgroundTint="#00845A"
+          android:textColor="@color/white"
+          android:textSize="20dp"
+          android:text="" />
 
       <TextView
+          android:layout_gravity="center"
+          android:layout_marginTop="30dp"
           android:id="@+id/txt1"
-          android:layout_width="match_parent"
+          android:layout_width="330dp"
           android:layout_height="wrap_content"
+          android:background="@drawable/radius2"
+          android:backgroundTint="#00845A"
+          android:textColor="@color/white"
           android:text="알레르기 유발식품 : ①-난류 ②-우유 ③-메밀 ④-땅콩 ⑤-대두 ⑥-밀 ⑦-고등어 ⑧-게 ⑨-새우 ⑩-돼지고기 ⑪-복숭아 ⑫-토마토 ⑬-아황산염."/>
 
       <Button
+          android:backgroundTint="#00845A"
+          android:layout_marginTop="20dp"
+          android:layout_gravity="center"
           android:id="@+id/btn"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
