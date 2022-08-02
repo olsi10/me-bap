@@ -32,14 +32,13 @@ public class MainActivity extends AppCompatActivity {
     TextView txt, txt1, time;
     Button btn;
     private RequestQueue mQueue;
-    // https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json&KEY=a7cc721e31ef4e5199636b84dd243813&ATPT_OFCDC_SC_CODE=B10&SD_SCHUL_CODE=7010569&MLSV_YMD=20220728&pIndex=1&pSize=10
     String url = "https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json";
     //    String urls = "https://open.neis.go.kr/hub/mealServiceDietInfo?&Type=json";
     String key = "a7cc721e31ef4e5199636b84dd243813";
     String areaCode = "B10"; //서울
-    String schoolCode = "7010569"; //미림여자정보과학고등학교
+    String schoolCode = "7010569"; //미림여자정보과학고등학교 학교 코드
     int urlDays = getUrlDate();
-    String newUrl = url + "&KEY=" + key + "&ATPT_OFCDC_SC_CODE=" + areaCode + "&SD_SCHUL_CODE=" + schoolCode + "&MLSV_YMD=" + urlDays + "&pIndex=1&pSize=10";
+    String newUrl = url + "&KEY=" + key + "&ATPT_OFCDC_SC_CODE=" + areaCode + "&SD_SCHUL_CODE=" + schoolCode + "&MLSV_YMD=" + urlDays + "&pIndex=1&pSize=10"; // 파싱할 json파일이 있는 url
 
 
 
@@ -113,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
     private void getDate(){
         Date currentTime = Calendar.getInstance().getTime();
 
-        String format_hh_mm = "hh:mm";
+        String format_hh_mm = "aa hh:mm"; // am, pm 표시
+//        String format_hh_mm = "kk:mm"; //24시간제
         String format_mm_dd = "MM월 dd일";
 
         SimpleDateFormat format = new SimpleDateFormat(format_hh_mm, Locale.getDefault());

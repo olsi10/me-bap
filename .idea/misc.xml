@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Projects/Projects/MeBap/app/src/main/res/drawable/radius.xml" value="0.1955" />
         <entry key="..\:/Android_Projects/Projects/MeBap/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android_Projects/Projects/MeBap/app/src/main/res/layout/activity_splash.xml" value="0.1875" />
         <entry key="..\:/Firebase/MeBap/app/src/main/res/drawable/radius.xml" value="0.1405" />
         <entry key="..\:/Firebase/MeBap/app/src/main/res/drawable/radius2.xml" value="0.1405" />
         <entry key="..\:/Firebase/MeBap/app/src/main/res/layout/activity_main.xml" value="0.25" />
