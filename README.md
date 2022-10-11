@@ -3,7 +3,8 @@
 
 |    |     |
 | --- | --- |
-|![image](https://user-images.githubusercontent.com/86298664/194882691-c3b0bba2-3d6e-40f1-a401-f36cc92c2f1c.png)|![image](https://user-images.githubusercontent.com/86298664/194882719-25ef1745-a583-49a1-8565-1eea91190c86.png)|
+|![image](https://user-images.githubusercontent.com/86298664/194882691-c3b0bba2-3d6e-40f1-a401-f36cc92c2f1c.png)|![image](https://user-images.githubusercontent.com/86298664/195034531-b5e95db2-bd10-495d-baab-69d6d4b87421.png)
+|
   
   
   ---
